@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Attendance-system</string>
+    <string name="title_activity_main">Attendance-system</string>
+    <string name="package_name">attendance.example.app</string>
+    <string name="custom_url_scheme">attendance.example.app</string>
+</resources>

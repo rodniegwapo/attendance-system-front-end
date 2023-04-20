@@ -1,14 +1,47 @@
+<script setup>
+import { useApi } from "@/composables/useApi.js";
+import router from "@/router";
+import { ref, reactive } from "vue";
+
+const loading = ref(false)
+
+const form = reactive({})
+
+const handleLogin = async () => {
+  try {
+        const response = await useApi().post(
+          "/login",
+          form
+        );
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem('isLoggedIn','true')
+        router.push('/scanner')
+        // redirect the user to the dashboard or the home page
+      } catch (error) {
+        console.log(error);
+      }
+}
+
+</script>
+
+
 <template>
   <section>
     <div>
-      <section class="h-screen bg-gray-100">
-        <div class="px-6 h-full text-gray-800">
+      <section class="h-screen ">
+        
+        <div class=" h-full text-gray-800">
+          
           <div
-            class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
+            class="flex relative xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
           >
+         
             <div
-              class="xl:ml-20 xl:w-1/3 border p-8 rounded-lg lg:w-1/4 md:w-8/12 mb-12 md:mb-0 bg-white max-w-[450px]"
+              class="xl:ml-20 xl:w-1/3 border relative p-8 rounded-lg lg:w-1/4 w-full mx-4 mb-12 md:mb-0 bg-gray-50 max-w-[450px]"
             >
+            
+            <span class="absolute top-2 left-2 text-sm text-blue-700 underline"><router-link to="/">Back</router-link></span>
+          
               <div class="py-4 text-red-600 text-xs" v-if="errors">
                 *{{ errors }}
               </div>
@@ -76,28 +109,4 @@
   </section>
 </template>
 
-<script>
-import axios from "axios";
-export default {
-  data() {
-    return {
-      form: {},
-      loading: false,
-    };
-  },
-  methods: {
-    async login() {
-      try {
-        const response = await axios.post(
-          "http://localhost:8000/api/login",
-          this.form
-        );
-        localStorage.setItem("token", response.data.token);
-        // redirect the user to the dashboard or the home page
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  },
-};
-</script>
+

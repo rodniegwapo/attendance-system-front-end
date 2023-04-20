@@ -1,0 +1,6 @@
+{
+  "appId": "attendance.example.app",
+  "appName": "Attendance-system",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
